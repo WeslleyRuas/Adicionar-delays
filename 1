@@ -1,0 +1,60 @@
+Delay
+ 
+Pois bem, Como muitos pedirão vou fazer um tutorial de como colocar delay em comandos, 
+Aprendi vendo video do Trow Games <3 vou deixar o link do video caso você não consiga entender.
+ 
+Primeiro de tudo, Faça uma variável para o delay 
+Para fazer isso digite 
+public static ArrayList<Player> dly = new ArrayList<>(); 
+Antes do 
+public void onEnable() 
+Agora vamos colocar o delay :3
+Vá ate o comando que você deseja colocar o delay
+Ai vamos ter que por o delay na ação que o comando executara, 
+Vou dar um exemplo, Um comando para que quando o jogador digitar /delay aparecer uma mensagem
+"Parabéns você conseguiu colocar delay"
+Primeiro temos que colocar isso
+if (!dly.contains(p)) {
+dly.add(p); 
+Agora colocamos a ação que o comando execultara no caso a mensagem, Ai vai ficar assim
+Bukkit.broadcastMessage("Parabéns você conseguiu colocar delay");
+O comando até agora está assim
+if (!dly.contains(p)) {
+dly.add(p); 
+Bukkit.broadcastMessage("Parabéns você conseguiu colocar delay"); 
+Agora vamos adicionar um Scheduler, Adicione isto 
+Bukkit.getScheduler().scheduleSyncDelayTask(this, new Runnable() {} 
+Por enquanto o comando está assim
+if (!dly.contains(p)) {
+dly.add(p);
+Bukkit.broadcastMessage("Parabéns você conseguiu colocar delay");
+Bukkit.getScheduler().scheduleSyncDelayTask(this, new Runnable() {}
+Agora adicione isto
+public void run() {
+dly.remove(p);
+}
+}, getConfig().getInt("Delay") * 20L);
+}else{
+p.sendMessage(getConfig().getString("Aguarde").replace("&", "§")); 
+Aqui eu coloquei o arquivo ja para ser adicionado na config, Agora vo mostrar como o comando vai ficar por completo
+if (!dly.contains(p)) {
+dly.add(p);
+Bukkit.broadcastMessage("Parabéns você conseguiu colocar delay");
+
+Bukkit.getScheduler().scheduleSyncDelayTask(this, new Runnable() {
+public void run() {
+
+dly.remove(p);
+
+}
+
+}, getConfig().getInt("Delay") * 20L);
+
+}else{
+
+
+p.sendMessage(getConfig().getString("Aguarde").replace("&", "§"));
+
+
+} 
+E só isso :3 espero ter ajudado, Caso você não tenha entendido o meu tutorial veja o video do Trow Games, Foi vendo o video dele que eu aprendi :3 
